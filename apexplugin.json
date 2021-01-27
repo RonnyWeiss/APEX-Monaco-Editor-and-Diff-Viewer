@@ -1,6 +1,6 @@
 {
     "name": "APEX-Monaco-Editor-and-Diff-Viewer",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "<p>This plug-in is used to render the visual studio code monaco editor in APEX. You can load source code as clob and the same or another source code as diff. The plug-in is also able to store the edited code back into the database e.g. in an APEX Collection as clob. You can set different languages, theme styles and many more.</p><p>Many thanks to Tobias Arnhold (https://twitter.com/tobias_arnhold) for testing and the idea!</p>",
     "keywords": ["oracle", "apex", "plugin", "code", "region", "responsive", "sql"],
     "homepage": "https://github.com/RonnyWeiss/APEX-Monaco-Editor-and-Diff-Viewer",
