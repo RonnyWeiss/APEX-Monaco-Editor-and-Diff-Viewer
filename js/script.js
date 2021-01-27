@@ -3,7 +3,7 @@ var apexMonacoEditor = function (apex) {
     var util = {
         "featureDetails": {
             name: "APEX-VS-Monaco-Editor",
-            scriptVersion: "1.0",
+            scriptVersion: "1.0.1",
             utilVersion: "1.4",
             url: "https://github.com/RonnyWeiss",
             url2: "https://linktr.ee/ronny.weiss",
@@ -359,11 +359,7 @@ var apexMonacoEditor = function (apex) {
             configJSON.regionIDRefreshSel = "#" + pRegionIDRefresh;
             configJSON.path = pPath;
             configJSON.ajaxID = pAjaxID;
-            configJSON.readOnly = false;
-
-            if (pReadOnly === "Y") {
-                configJSON.readOnly = true;
-            }
+            configJSON.readOnly = pReadOnly;
 
             $(configJSON.regionSel).height(configJSON.height);
             $(configJSON.regionSel).css("overflow", "hidden");
