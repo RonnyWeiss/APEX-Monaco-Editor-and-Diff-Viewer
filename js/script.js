@@ -155,90 +155,93 @@ var apexMonacoEditor = function (apex) {
         var search = false;
         var diff = pIsDiffEditor
 
-        var container = $("<div></div>");
-        container.addClass("apex-vs-monaco-editor-toolbar-container");
-        container.css("border", "1px solid rgba(0,0,0,0.075)");
+        if (pConfig.buttonsStr && pConfig.buttonsStr.length > 0) {
 
-        if (pConfig.buttons.indexOf("undo") > -1) {
-            var undoBtn = createButton("fa-undo");
-            undoBtn.on("click", function () {
-                if (diff) {
-                    editor.getOriginalEditor().getModel().undo();
-                } else {
-                    editor.getModel().undo();
-                }
-            });
-            container.append(undoBtn);
-        }
+            var container = $("<div></div>");
+            container.addClass("apex-vs-monaco-editor-toolbar-container");
+            container.css("border-bottom", "1px solid rgba(0,0,0,0.075)");
 
-        if (pConfig.buttons.indexOf("redo") > -1) {
-            var repeatBtn = createButton("fa-repeat");
-            repeatBtn.on("click", function () {
-                if (diff) {
-                    editor.getOriginalEditor().getModel().redo();
-                } else {
-                    editor.getModel().redo();
-                }
-            });
-            container.append(repeatBtn);
-        }
-
-        if (pConfig.buttons.indexOf("search") > -1) {
-            var searchBtn = createButton("fa-search");
-            searchBtn.on("click", function () {
-                var searchClass = "has-search-opened";
-                search = !search;
-                if (search) {
+            if (pConfig.buttons.indexOf("undo") > -1) {
+                var undoBtn = createButton("fa-undo");
+                undoBtn.on("click", function () {
                     if (diff) {
-                        editor.getOriginalEditor().getAction('actions.find').run();
-                        editor.getModifiedEditor().getAction('actions.find').run();
+                        editor.getOriginalEditor().getModel().undo();
                     } else {
-                        editor.getAction('actions.find').run();
+                        editor.getModel().undo();
                     }
-                } else {
+                });
+                container.append(undoBtn);
+            }
+
+            if (pConfig.buttons.indexOf("redo") > -1) {
+                var repeatBtn = createButton("fa-repeat");
+                repeatBtn.on("click", function () {
                     if (diff) {
-                        editor.getOriginalEditor().trigger('keyboard', 'closeFindWidget');
-                        editor.getModifiedEditor().trigger('keyboard', 'closeFindWidget');
+                        editor.getOriginalEditor().getModel().redo();
                     } else {
-                        editor.trigger('keyboard', 'closeFindWidget');
+                        editor.getModel().redo();
                     }
-                }
-            });
-            container.append(searchBtn);
-        }
+                });
+                container.append(repeatBtn);
+            }
 
-        if (pConfig.buttons.indexOf("diff") > -1) {
-            var diffBtn = createButton("fa-arrows-h");
-            diffBtn.on("click", function () {
-                search = false;
-                diff = !diff;
-                var str;
-                if (!diff) {
-                    str = editor.getModel().original.getValue();
-                } else {
-                    str = editor.getValue();
-                }
-                editor.dispose();
-                initEditor(pConfig, str, diff, pDiffStr);
-            });
-            container.append(diffBtn);
-        }
+            if (pConfig.buttons.indexOf("search") > -1) {
+                var searchBtn = createButton("fa-search");
+                searchBtn.on("click", function () {
+                    var searchClass = "has-search-opened";
+                    search = !search;
+                    if (search) {
+                        if (diff) {
+                            editor.getOriginalEditor().getAction('actions.find').run();
+                            editor.getModifiedEditor().getAction('actions.find').run();
+                        } else {
+                            editor.getAction('actions.find').run();
+                        }
+                    } else {
+                        if (diff) {
+                            editor.getOriginalEditor().trigger('keyboard', 'closeFindWidget');
+                            editor.getModifiedEditor().trigger('keyboard', 'closeFindWidget');
+                        } else {
+                            editor.trigger('keyboard', 'closeFindWidget');
+                        }
+                    }
+                });
+                container.append(searchBtn);
+            }
 
-        if (pConfig.buttons.indexOf("save") > -1) {
-            var saveBtn = createButton("fa-save");
-            saveBtn.on("click", function () {
-                var str;
-                if (diff) {
-                    str = editor.getModel().original.getValue();
-                } else {
-                    str = editor.getValue();
-                }
-                uploadFiles(pConfig, str);
-            });
-            container.append(saveBtn);
-        }
+            if (pConfig.buttons.indexOf("diff") > -1) {
+                var diffBtn = createButton("fa-arrows-h");
+                diffBtn.on("click", function () {
+                    search = false;
+                    diff = !diff;
+                    var str;
+                    if (!diff) {
+                        str = editor.getModel().original.getValue();
+                    } else {
+                        str = editor.getValue();
+                    }
+                    editor.dispose();
+                    initEditor(pConfig, str, diff, pDiffStr);
+                });
+                container.append(diffBtn);
+            }
 
-        $(pConfig.regionSel).prepend(container);
+            if (pConfig.buttons.indexOf("save") > -1) {
+                var saveBtn = createButton("fa-save");
+                saveBtn.on("click", function () {
+                    var str;
+                    if (diff) {
+                        str = editor.getModel().original.getValue();
+                    } else {
+                        str = editor.getValue();
+                    }
+                    uploadFiles(pConfig, str);
+                });
+                container.append(saveBtn);
+            }
+
+            $(pConfig.regionSel).prepend(container);
+        }
 
         /* trigger editor from outside to save the text */
         $(pConfig.regionIDRefreshSel).on("save", function () {
@@ -349,7 +352,8 @@ var apexMonacoEditor = function (apex) {
             });
 
             var configJSON = {};
-            configJSON.buttons = pButtons.split(":")
+            configJSON.buttons = pButtons.split(":");
+            configJSON.buttonsStr = pButtons;
             configJSON.height = pHeight || "50vh";
             configJSON.language = pLanguage || "plaintext";
             configJSON.theme = pTheme || "vs-dark";
@@ -362,6 +366,7 @@ var apexMonacoEditor = function (apex) {
             configJSON.readOnly = pReadOnly;
 
             $(configJSON.regionSel).height(configJSON.height);
+            $(configJSON.regionSel).css("border", "1px solid rgba(0,0,0,0.075)");
             $(configJSON.regionSel).css("overflow", "hidden");
 
             getData(configJSON);
