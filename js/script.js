@@ -3,8 +3,8 @@ var apexMonacoEditor = function (apex) {
     var util = {
         "featureDetails": {
             name: "APEX-VS-Monaco-Editor",
-            scriptVersion: "1.0.2",
-            utilVersion: "1.4",
+            scriptVersion: "1.0.2.1",
+            utilVersion: "1.6",
             url: "https://github.com/RonnyWeiss",
             url2: "https://linktr.ee/ronny.weiss",
             license: "MIT-License"
@@ -33,7 +33,20 @@ var apexMonacoEditor = function (apex) {
         },
         splitString2Array: function (pString) {
             if (typeof pString !== "undefined" && pString !== null && pString != "" && pString.length > 0) {
-                return apex.server.chunk(pString);
+                if (apex && apex.server && apex.server.chunk) {
+                    return apex.server.chunk(pString);
+                } else {
+                    /* apex.server.chunk only avail on APEX 18.2+ */
+                    var splitSize = 8000;
+                    var tmpSplit;
+                    var retArr = [];
+                    if (pString.length > splitSize) {
+                        for (retArr = [], tmpSplit = 0; tmpSplit < pString.length;) retArr.push(pString.substr(tmpSplit, splitSize)), tmpSplit += splitSize;
+                        return retArr
+                    }
+                    retArr.push(pString);
+                    return retArr;
+                }
             } else {
                 return [];
             }
