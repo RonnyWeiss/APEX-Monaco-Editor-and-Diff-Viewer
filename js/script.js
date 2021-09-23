@@ -3,7 +3,7 @@ var apexMonacoEditor = function (apex) {
     var util = {
         "featureDetails": {
             name: "APEX-VS-Monaco-Editor",
-            scriptVersion: "1.0.2.1",
+            scriptVersion: "1.0.2.2",
             utilVersion: "1.6",
             url: "https://github.com/RonnyWeiss",
             url2: "https://linktr.ee/ronny.weiss",
@@ -319,6 +319,7 @@ var apexMonacoEditor = function (apex) {
     function getData(pConfig) {
         var submitItems = pConfig.items2Submit;
         util.loader.start(pConfig.regionSel);
+
         /* call apex server */
         apex.server.plugin(
             pConfig.ajaxID, {
@@ -377,6 +378,7 @@ var apexMonacoEditor = function (apex) {
             configJSON.path = pPath;
             configJSON.ajaxID = pAjaxID;
             configJSON.readOnly = pReadOnly;
+            configJSON.items2Submit = pItems2Submit;
 
             $(configJSON.regionSel).height(configJSON.height);
             $(configJSON.regionSel).css("border", "1px solid rgba(0,0,0,0.075)");
