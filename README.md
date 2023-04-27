@@ -8,11 +8,9 @@ You can set different languages, theme styles and many more.
 
 Many thanks to Tobias Arnhold (https://twitter.com/tobias_arnhold) for testing and the idea!
 
-Examples can be found in the Sample App:
+For working Demo just click on:
 
-https://apex.oracle.com/pls/apex/f?p=103428
-
-The Code is also running without APEX. For test just start index.html!
+https://APEX.oracle.com/pls/APEX/f?p=103428
 
 If you like my stuff, donate me a coffee
 
