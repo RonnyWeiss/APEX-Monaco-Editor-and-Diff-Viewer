@@ -3,7 +3,7 @@ var apexMonacoEditor = function (apex) {
     var util = {
         "featureDetails": {
             name: "APEX-VS-Monaco-Editor",
-            scriptVersion: "1.0.2.2",
+            scriptVersion: "24.04.18",
             utilVersion: "1.6",
             url: "https://github.com/RonnyWeiss",
             url2: "https://linktr.ee/ronny.weiss",
