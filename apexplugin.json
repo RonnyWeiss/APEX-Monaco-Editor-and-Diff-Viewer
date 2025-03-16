@@ -1,6 +1,6 @@
 {
     "name": "APEX-Monaco-Editor-and-Diff-Viewer",
-    "version": "24.04.18",
+    "version": "25.03.16",
     "description": "<p>This plug-in is used to render the visual studio code monaco editor in APEX. You can load source code as clob and the same or another source code as diff. The plug-in is also able to store the edited code back into the database e.g. in an APEX Collection as clob. You can set different languages, theme styles and many more.</p><p>Many thanks to Tobias Arnhold (https://twitter.com/tobias_arnhold) for testing and the idea!</p><p><b>Important clarification: My work in the development team of Oracle APEX is in no way related to my open source projects or the plug-ins here on apex.world! All plug-ins are built in my spare time and are not supported by Oracle!</b></p>",
     "keywords": ["oracle", "apex", "plugin", "code", "region", "responsive", "sql"],
     "homepage": "https://github.com/RonnyWeiss/APEX-Monaco-Editor-and-Diff-Viewer",
@@ -20,9 +20,9 @@
         "url": "https://github.com/RonnyWeiss/APEX-Monaco-Editor-and-Diff-Viewer.git"
     },
     "oracle": {
-        "versions": ["12.2.0.1", "18.4.0.0", "19.0.0.0.0", "19.2.0.0.19", "21.0.0.0.0", "21.1.0.0.0", "21.1.0.0.1"],
+        "versions": ["18c", "19c", "21c", "23c", "23ai"],
         "apex": {
-            "versions": ["18.1.0.00.45", "18.2.0.00.12", "19.1.0.00.15", "19.2.0.00.18", "20.1.0.00.13", "20.2.0.00.20", "21.1.0", "21.2.0", "22.1.0", "22.2.0", "23.1.0", "23.2.0"],
+            "versions": ["21.1", "21.2", "22.1", "22.2", "23.1", "23.2", "24.1", "24.2"],
             "plugin": {
                 "internalName": "RW.APEX.VS.MONACO.EDITOR",
                 "type": "region",
